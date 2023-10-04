@@ -6,6 +6,7 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
     dialect: "mysql",
     dialectModule: require('mysql2'),
     port: process.env.DB_PORT || 3306,
+    logging: false
 });
 
 module.exports = sequelize;
