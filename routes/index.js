@@ -6,7 +6,7 @@ const isAuth = require('../middlewares/isAuth');
 // importação das rotas
 const AuthRoutes = require('./auth.route');
 const ProdutorRoutes = require('./produtor.route');
-const PropriedadeRoutes = require('./propriedade.route');
+// const PropriedadeRoutes = require('./propriedade.route');
 
 
 const routes = Router();
@@ -15,7 +15,7 @@ routes.use('/auth', AuthRoutes); // adicionar rotas de autenticação. Aqui pode
 
 // rotas privadas, que necessida de autenticação, sempre será adicionado a middleware isAuth
 routes.use('/produtor', isAuth, ProdutorRoutes);
-routes.use('/propriedade', isAuth, PropriedadeRoutes);
+// routes.use('/propriedade', isAuth, PropriedadeRoutes);
 
 
 routes.use((error, req, res, next) => {
