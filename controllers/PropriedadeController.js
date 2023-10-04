@@ -44,4 +44,19 @@ const list = async () => {
     }
 };
 
-module.exports = { store, get, list };
+
+const listByProdutor = async (produtor_id) => {
+    try {
+        // listar e contabilizar a quantidade de propriedades
+        const result = await Propriedade.findAndCountAll({
+            where: { produtor_id },
+            include: ['produtor']
+        });
+        return result;
+    } catch (e) {
+        throw new AppError(e, e?.status, e.stack)
+    }
+};
+
+
+module.exports = { store, get, list, listByProdutor };
