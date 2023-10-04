@@ -1,10 +1,12 @@
 const { Router } = require('express');
-const ProdutorController = require("../controllers/ProdutorController")
 const { AppError } = require('../helpers/AppError');
+
+const ProdutorController = require("../controllers/ProdutorController");
+const ProdutorValidator = require("../validators/ProdutorValidator");
 
 const route = Router();
 
-route.post('/', async (req, res, next) => {
+route.post('/', ProdutorValidator.store, async (req, res, next) => {
     const { nomeProdutor, cpfProdutor } = req.body;
     try {
         const result = await ProdutorController.store({ nomeProdutor, cpfProdutor });
@@ -23,7 +25,7 @@ route.get('/', async (req, res, next) => {
     }
 });
 
-route.get('/:id', async (req, res, next) => {
+route.get('/:id', ProdutorValidator.get, async (req, res, next) => {
     try {
         const id = req.params.id;
         const result = await ProdutorController.get(id);

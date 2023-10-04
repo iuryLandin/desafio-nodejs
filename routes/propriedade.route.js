@@ -1,10 +1,12 @@
 const { Router } = require('express');
+const { AppError } = require("../helpers/AppError");
+
 const PropriedadeController = require("../controllers/PropriedadeController")
-const { AppError } = require('../helpers/AppError');
+const PropriedadeValidator = require("../validators/PropriedadeValidator");
 
 const route = Router();
 
-route.post('/', async (req, res, next) => {
+route.post('/', PropriedadeValidator.store, async (req, res, next) => {
     const { nomePropriedade, cadastroRural, produtor_id } = req.body;
     try {
         const result = await PropriedadeController.store({ nomePropriedade, cadastroRural, produtor_id });
@@ -28,7 +30,7 @@ route.get('/', async (req, res, next) => {
     }
 });
 
-route.get('/:id', async (req, res, next) => {
+route.get('/:id', PropriedadeValidator.get, async (req, res, next) => {
     try {
         const id = req.params.id;
         const result = await PropriedadeController.get(id);

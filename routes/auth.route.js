@@ -1,10 +1,11 @@
 const { Router } = require('express');
-const UsuarioController = require("../controllers/UsuarioController")
 const { AppError } = require('../helpers/AppError');
+const UsuarioController = require("../controllers/UsuarioController")
+const UsuarioValidator = require("../validators/UsuarioValidator");
 
 const route = Router();
 
-route.post('/', async (req, res, next) => {
+route.post('/', UsuarioValidator, async (req, res, next) => {
     const { nomeUsuario, senhaUsuario } = req.body;
     try {
         const result = await UsuarioController.login(nomeUsuario, senhaUsuario);
@@ -15,7 +16,7 @@ route.post('/', async (req, res, next) => {
 
 });
 
-route.post('/cadastro', async (req, res, next) => {
+route.post('/cadastro', UsuarioValidator, async (req, res, next) => {
     const { nomeUsuario, senhaUsuario } = req.body;
     try {
         const result = await UsuarioController.store(nomeUsuario, senhaUsuario);

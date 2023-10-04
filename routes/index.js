@@ -17,7 +17,7 @@ routes.use('/auth', AuthRoutes); // adicionar rotas de autenticação. Aqui pode
 routes.use('/produtor', isAuth, ProdutorRoutes);
 routes.use('/propriedade', isAuth, PropriedadeRoutes);
 
-
+// midleware para retornar padrao de erro
 routes.use((error, req, res, next) => {
     let code = error.status || 400; // pegar o codigo de erro HTTP caso nao consiga, utilizar por padrao o 400
     let message;
