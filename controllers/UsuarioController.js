@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const { AppError } = require('../config/AppError');
+const { AppError } = require('../helpers/AppError');
 const Usuario = require("../models/Usuario")
 
 const login = async (nomeUsuario, senhaUsuario) => {
@@ -38,5 +38,27 @@ const login = async (nomeUsuario, senhaUsuario) => {
     }
 };
 
+const store = async (nomeUsuario, senhaUsuario) => {
+    try {
+        // verificação se já existe usuario pra o nome informado
+        const verifica = await Usuario.count({ where: { nomeUsuario } });
+        if (verifica > 0) {
+            throw new AppError("Usuário já existe", 400, '');
+        }
+        // caso nao exista, prossegue com a criação do hash da senha e insersão na tabela no BD
+        const hashPwd = bcrypt.hashSync(senhaUsuario, 12);
+        const inserted = await Usuario.create({
+            nomeUsuario,
+            senhaUsuario: hashPwd
+        })
+        return {
+            id: inserted.idUsuario,
+            nomeUsuario
+        }
+    } catch (e) {
+        throw new AppError(e, 400, e.stack)
+    }
 
-module.exports = { login };
+};
+
+module.exports = { login, store };
