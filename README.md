@@ -1,5 +1,5 @@
 
-<img src="https://content.pstmn.io/fb24b31b-60a9-4f8d-a57f-b760f566b2ad/aW1hZ2UucG5n" width="230" height="74">
+<img src="https://content.pstmn.io/fb24b31b-60a9-4f8d-a57f-b760f566b2ad/aW1hZ2UucG5n" width="240">
 
 #### Teste para desenvolvedor Back-end
 
@@ -265,6 +265,3 @@ URL: {{base_url}}/api/propriedade
 
 
 ---
-[ir para o topo](#desafio-nodejs)
-
-
