@@ -7,8 +7,8 @@ const route = Router();
 route.post('/', async (req, res, next) => {
     const { nomeUsuario, senhaUsuario } = req.body;
     try {
-        const user = await UsuarioController.login(nomeUsuario, senhaUsuario);
-        return res.status(200).json(user);
+        const result = await UsuarioController.login(nomeUsuario, senhaUsuario);
+        return res.status(200).json(result);
     } catch (e) {
         next(new AppError(e))
     }
